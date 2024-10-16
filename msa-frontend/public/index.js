@@ -12,7 +12,7 @@ router.get('/user', function(req, res, next) {
   res.sendFile(__dirname + '/views/user.html')
 });
 
-/* user registration */
+/* users registration */
 router.get('/users', function(req, res, next) {
   res.sendFile(__dirname + '/views/users.html')
 });
@@ -21,6 +21,12 @@ router.get('/users', function(req, res, next) {
 /* product registration */
 router.get('/product', function(req, res, next) {
   res.sendFile(__dirname + '/views/product.html')
+});
+
+
+/* products registration */
+router.get('/products', function(req, res, next) {
+  res.sendFile(__dirname + '/views/products.html')
 });
 
 
