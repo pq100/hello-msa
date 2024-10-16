@@ -28,15 +28,14 @@ const getProductList = async () => {
 const displayProductList = (products) => {
     // 테스트용 데이터
     // products = [{'name':'테스트', 'price':99999, 'regdate': '2024-10-16'}];
-
     const productlist = document.querySelector('#product-list');
     console.log(products);
 
     let html = '<ul>';
     for (const p of products) {
         html += `<li>
-            상품 이름 : ${p.name} ,
-            상품 가격 : ${p.price} ,
+            상품 이름 : <a href="/product/${p.pno}">${p.name}</a> ,
+            상품 가격 : ${p.price},
             상품 등록일 : ${p.regdate}
         </li>`;
     }
