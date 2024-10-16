@@ -12,6 +12,13 @@ router.get('/user', function(req, res, next) {
   res.sendFile(__dirname + '/views/user.html')
 });
 
+
+/* user registration */
+router.get('/user/:mno', function(req, res, next) {
+  res.sendFile(__dirname + '/views/userone.html')
+});
+
+
 /* users registration */
 router.get('/users', function(req, res, next) {
   res.sendFile(__dirname + '/views/users.html')
