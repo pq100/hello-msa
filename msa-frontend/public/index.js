@@ -38,6 +38,19 @@ router.get('/userlogin', function(req, res, next) {
 });
 
 
+/* secure page access */
+router.get('/secure', function(req, res, next) {
+  res.sendFile(__dirname + '/views/secure.html')
+});
+
+
+/* logout - session remove */
+router.get('/logout', function(req, res, next) {
+  sessionStorage.removeItem('');
+  location.href = '/';
+});
+
+
 /* product registration */
 router.get('/product', function(req, res, next) {
   res.sendFile(__dirname + '/views/product.html')
@@ -54,6 +67,7 @@ router.get('/products', function(req, res, next) {
 router.get('/product/:pno', function(req, res, next) {
   res.sendFile(__dirname + '/views/productone.html')
 });
+
 
 
 module.exports = router;
