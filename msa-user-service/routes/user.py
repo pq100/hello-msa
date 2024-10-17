@@ -2,9 +2,11 @@ from fastapi import APIRouter
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 
-from schema.user import User, UserList, UserBase
+from schema.user import User, UserList, UserBase, Token, UserLogin
 from service.database import get_db
 from service.user import register, userlist, userone
+from service.auth import userlogin
+from typing import Optional
 
 router = APIRouter()
 
@@ -30,3 +32,14 @@ async def user_one(mno: int, db: Session=Depends(get_db)):
     print(user)
 
     return User.model_validate(user)
+
+
+@router.post('/userlogin', response_model=Optional[Token])
+async def user_login(login: UserLogin, db: Session=Depends(get_db)):
+    token = userlogin(login, db)
+    print(token)
+
+    if token is None:
+        raise HTTPException(status_code=401, detail='로그인 실패! - 아이디나 비밀번호가 틀려요!')
+
+    return token
