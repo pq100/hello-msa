@@ -20,15 +20,21 @@ router.get('/user', function(req, res, next) {
 });
 
 
+/* users registration */
+router.get('/users', function(req, res, next) {
+  res.sendFile(__dirname + '/views/users.html')
+});
+
+
 /* user registration */
 router.get('/user/:mno', function(req, res, next) {
   res.sendFile(__dirname + '/views/userone.html')
 });
 
 
-/* users registration */
-router.get('/users', function(req, res, next) {
-  res.sendFile(__dirname + '/views/users.html')
+/* user login 1 */
+router.get('/userlogin', function(req, res, next) {
+  res.sendFile(__dirname + '/views/userlogin.html')
 });
 
 
