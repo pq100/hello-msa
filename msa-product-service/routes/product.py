@@ -7,7 +7,7 @@ from fastapi import HTTPException
 
 from schema.product import ProductBase, Product, ProductList
 from service.database import get_db
-from service.product import register, productlist, productone, productdelete
+from service.product import register, productlist, productone, productdelete, productupdate
 
 router = APIRouter()
 
@@ -39,5 +39,15 @@ async def product_one(pno: int, db: Session=Depends(get_db)):
 @router.delete('/product/{pno}', response_model=int)
 async def product_delete(pno: int, db: Session=Depends(get_db)):
     result = productdelete(db, pno)
+
+    return result
+
+@router.put('/product', response_model=int)
+async def product_update(product: Product, db: Session=Depends(get_db)):
+    result = productupdate(db, product)
+
+    # 상품이 조회되지 않을 경우 응답코드 404를 프론트엔드로 전달
+    if product is None:
+        raise HTTPException(status_code=404, detail='Product not found')
 
     return result
