@@ -63,10 +63,19 @@ router.get('/products', function(req, res, next) {
 });
 
 
-/* user registration */
+/* product pno */
 router.get('/product/:pno', function(req, res, next) {
   res.sendFile(__dirname + '/views/productone.html')
 });
+
+
+/* product update */
+router.get('/product_put/:pno', function(req, res, next) {
+  res.sendFile(__dirname + '/views/product_put.html')
+});
+
+
+//----
 
 
 /* naver api login */

@@ -49,7 +49,8 @@ const displayProductList = (products) => {
 
 
 const pmodify = (pno) => {
-    alert('수정되었습니다!');
+    let url = `http://127.0.0.1:3000/product_put/${pno}`;
+    location.href=url;
 };
 
 
