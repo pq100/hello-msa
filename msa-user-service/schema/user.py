@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from sqlalchemy.cyextension.resultproxy import BaseRow
 
 
 class UserBase(BaseModel):
@@ -16,11 +17,12 @@ class User(UserBase):
     class Config:
         from_attributes=True
 
+
 class UserList(BaseModel):
     userid: str
     name: str
     mno: int
-    regdate:str
+    regdate: str
 
     class Config:
         from_attributes=True

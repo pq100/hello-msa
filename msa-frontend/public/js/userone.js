@@ -1,7 +1,5 @@
 // 페이지 완전하게 로드시 자동으로 실행
 document.addEventListener('DOMContentLoaded', async () => {
-
-    // http://127.0.0.1:3000/user/1 ~ 3
     let idx = location.href.lastIndexOf('/');
     let mno = location.href.substring(idx + 1);
 
@@ -14,9 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-//
 const getUserOne = async (mno) => {
-    let url = `http://127.0.0.1:8000/user/${mno}`;
+    let url = `http://${sessionStorage.getItem('usersrvURL')}/user/${mno}`;
     const res = await fetch(url);
     if (res.ok) {
         data = await res.json();
@@ -26,20 +23,18 @@ const getUserOne = async (mno) => {
     }
 }
 
-
 const displayUserOne = (user) => {
     const userone = document.querySelector('#userone');
     console.log(user);
 
     let html = '<ul>';
-        html += `<li>
-            회원 번호 :${user.mno},
-            회원 아이디 :${user.userid},
-            회원 이름 : ${user.name},
-            회원 이메일 : ${user.email},
-            회원 가입일 : ${user.regdate}
-        </li>`;
-
+    html += `<li>
+    회원번호 : ${user.mno},
+    회원아이디 : ${user.userid},
+    회원이름 : ${user.name},
+    회원이메일 : ${user.email},
+    회원가입일 : ${user.regdate}
+    </li>`;
     html += '</ul>';
 
     userone.innerHTML = html;

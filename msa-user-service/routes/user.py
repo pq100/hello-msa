@@ -1,12 +1,13 @@
-from fastapi import APIRouter
+from typing import List, Optional
+
+from fastapi import APIRouter, HTTPException
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 
-from schema.user import User, UserList, UserBase, Token, UserLogin
+from schema.user import User, UserBase, UserList, Token, UserLogin
+from service.auth import userlogin
 from service.database import get_db
 from service.user import register, userlist, userone
-from service.auth import userlogin
-from typing import Optional
 
 router = APIRouter()
 
@@ -16,13 +17,14 @@ async def new_user(user: UserBase, db: Session=Depends(get_db)):
 
     return register(db, user)
 
+
 @router.get('/users', response_model=list[UserList])
 async def list_users(db: Session=Depends(get_db)):
     users = userlist(db)
 
     # 테이블 조회한 결과 객체를
     # UserList 형식의 배열로 재생성
-    # return [UserList.from_orm(u) for u in users]
+    #return [UserList.from_orm(u) for u in users]
     return [UserList.model_validate(u) for u in users]
 
 
@@ -40,6 +42,7 @@ async def user_login(login: UserLogin, db: Session=Depends(get_db)):
     # print(token)
 
     if token is None:
-        raise HTTPException(status_code=401, detail='로그인 실패! - 아이디나 비밀번호가 틀려요!')
+        raise HTTPException(401,
+            '로그인 실패! - 아이디나 비밀번호가 틀려요!')
 
     return token

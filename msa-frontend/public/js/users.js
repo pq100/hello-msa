@@ -11,16 +11,15 @@ window.addEventListener('load', async () => {
 
 // 회원 데이터 가져오기
 const getUserList = async () => {
-    let url = 'http://127.0.0.1:8000/users'
+    let url = `http://${sessionStorage.getItem('usersrvURL')}/users`
     const res = await fetch(url);
     if (res.ok) {
-        const data = await res.json()
+        const data = await res.json();
         return data;
     } else {
-        throw new Error('회원 목록 조회 실패!!')
+        throw new Error('회원 목록 조회 실패!!');
     }
 };
-
 
 
 // 가져온 회원 데이터 표시하기
@@ -31,12 +30,20 @@ const displayUserList = (users) => {
     let html = '<ul>';
     for (const user of users) {
         html += `<li>
-            회원 아이디 : <a href="/user/${user.mno}">${user.userid}</a> ,
-            회원 이름 : ${user.name} ,
-            회원 가입일 : ${user.regdate}
-        </li>`;
+            회원아이디 : <a href="/user/${user.mno}">${user.userid}</a>,
+            회원이름 : ${user.name},
+            회원가입일 : ${user.regdate}
+         </li>`;
     }
     html += '</ul>';
 
     userlist.innerHTML = html;
 };
+
+
+
+
+
+
+
+

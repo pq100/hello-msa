@@ -2,7 +2,6 @@ const loginbtn = document.querySelector('#loginbtn');
 const loginfrm = document.loginfrm;
 const naver = document.querySelector('#naver');
 
-
 loginbtn.addEventListener('click', async () => {
     const formData = new FormData(loginfrm);
 
@@ -11,7 +10,7 @@ loginbtn.addEventListener('click', async () => {
         jsondata[key] = val;
     });
 
-    const res = await fetch('http://127.0.0.1:8000/userlogin',
+    const res = await fetch(`http://${sessionStorage.getItem('usersrvURL')}/userlogin`,
         {
             method: 'POST',
             headers: {
@@ -41,11 +40,10 @@ loginbtn.addEventListener('click', async () => {
 
 });
 
-
 // 네이버 로그인 버튼 표시
-// 즉시 실행 함수 - 일반적인 함수 실행은 함수 정의 후 호출 시 이루어 짐
-// 하지만, 즉시 실행 함수는 함수 정의 후 바로 함수를 실행하게 함
-// (함수명() { 함수 몸체 })(), (() => { 함수 몸체 })()
+// 즉시 실행 함수 : 일반적인 함수 실행은 함수 정의후 호출시 이루어 짐
+// 하지만, 즉시 실행 함수는 함수 정의후 바로 함수를 실행하게 함
+// (함수명() { 함수몸체 })(), (() => { 함수몸체 })()
 (() => {
     // naver.innerHTML = "<p>Hello, World!!</p>";
     fetch('http://127.0.0.1:3000/api/naver2')
@@ -55,5 +53,5 @@ loginbtn.addEventListener('click', async () => {
             }
         }).then(data => {
             naver.innerHTML = data;
-    })
+        })
 })();
